@@ -12,13 +12,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('task','TasksController' );
 
-Route::get('/', function(){
-    return redirect()->route('task.index');
+
+Route::get('/', function () {
+    return redirect(route('login'));
 });
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Route::group(['prefix' => 'todolist', 'middleware' => 'auth'],  function(){
+    Route::get('/', function(){
+        return redirect()->route('task.index');
+    });
+    Route::resource('task','TasksController' ); 
+});

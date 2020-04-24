@@ -1,7 +1,8 @@
+
 @extends('layouts.main')
 @section('title', 'Home Page')
 @section('content')
-   
+@extends('layouts.nav')
              
             <div class="d-flex mb-3">
                 <h4 class="flex-grow-1">{{ isset ($title) ? $title : 'Dhaka no title'}}</h4>
