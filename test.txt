@@ -1,0 +1,4 @@
+task status
+Status: done, active, inactive, pending 
+
+Use table :user_id, user role, stutus, user-type

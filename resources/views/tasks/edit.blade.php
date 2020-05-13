@@ -7,7 +7,5 @@
             @component('components.taskForm')
             @endcomponent
             {!! Form::close() !!}
-
-            
-     
+   
 @endsection

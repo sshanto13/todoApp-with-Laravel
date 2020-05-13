@@ -8,7 +8,7 @@
     
     {{Form::label('due_date', 'Due Date', ['class' => 'control-label mt-3']) }}
     {{Form::date('due_date', null, ['class' =>'form-control shadow']) }}
-
+    
     <div class="row">
         <div class="col-sm-12">
             <div class="d-flex">
