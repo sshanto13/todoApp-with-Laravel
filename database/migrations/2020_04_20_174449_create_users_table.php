@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('email')->unique();
             $table->integer('role_id')->default('3');
             $table->enum('type', ['system', 'admin', 'user'])->defualt('user');
@@ -23,8 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->softDeletes();
-            $table->timestamps();
-            
+            $table->timestamps();           
         });
     }
 
