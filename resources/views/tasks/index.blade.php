@@ -12,7 +12,8 @@
             </div>
           
             <ul class="list-group">
-             @foreach ($tasks as $task)
+                @foreach(Auth::user()->tasks as $task)
+        
              <li class="list-group-item mb-2 shadow-sm">
                  <div class="d-flex">
                     <h6 class=" flex-grow-1"> <i class="fas fa-check-square"></i> {{$task->name}}  </h6>

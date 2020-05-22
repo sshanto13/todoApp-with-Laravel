@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
+use Auth;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Traits\TimestampsTrait;
-
 
 class TasksController extends Controller
 {
@@ -18,13 +17,19 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $data['title'] = "My todo List";
+             // paginate the authorized user's tasks with 5 per page
+             $tasks = Auth::user()
+             //->tasks()
+             //->orderBy('is_complete')
+             ->orderByDesc('created_at')
+             ->paginate(5);
+ 
+         // return task index view with paginated tasks
+         return view('tasks.index', [
+             'tasks' => $tasks
+         ]);
 
-        $data['tasks'] = Task::orderBy('due_date', 'desc')->paginate(4);
-        return view('tasks.index', $data); 
-       
-       // $tasks = Task::orderBy('due_date', 'desc')->paginate(5);
-       // return view('tasks.index')->with('tasks', $tasks);
+     
     
     }
 
@@ -59,11 +64,10 @@ class TasksController extends Controller
        $task = new Task;
 
        //assign new Task from our request
-
+       $task->user_id = auth()->user()->id;
        $task->name        = $request->name;
        $task->description = $request->description;
        $task->due_date        = $request->due_date;
-
        //save the task
 
        $task->save();
@@ -102,7 +106,7 @@ class TasksController extends Controller
 
        $task = Task::findOrFail($id);
        $task->dueDateFormatting = false;
-        return view('tasks.edit')->withTask($task); 
+       return view('tasks.edit')->withTask($task); 
     }
 
     /**

@@ -25,4 +25,8 @@ class Task extends Model
 
     //created at (5mins ago)
     //
+    public function user()
+{
+    return $this->belongsTo('App\User');
+}
 }
