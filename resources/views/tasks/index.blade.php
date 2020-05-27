@@ -5,14 +5,14 @@
 @extends('layouts.nav')
              
             <div class="d-flex mb-3">
-                <h4 class="flex-grow-1">{{ isset ($title) ? $title : 'Dhaka no title'}}</h4>
+                <h4 class="flex-grow-1">{{ isset ($title) ? $title : 'No data found'}}</h4>
                 
              <a href="{{ route('task.create')}}" class="btn btn-sm btn-primary flex-grow-1 add-task"><i class="fas fa-plus-circle"></i></a>
            
             </div>
           
             <ul class="list-group">
-                @foreach(Auth::user()->tasks as $task)
+                @foreach($tasks as $task)
         
              <li class="list-group-item mb-2 shadow-sm">
                  <div class="d-flex">

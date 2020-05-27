@@ -16,17 +16,31 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {       
              // paginate the authorized user's tasks with 5 per page
-             $tasks = Auth::user()
-             //->tasks()
-             //->orderBy('is_complete')
-             ->orderByDesc('created_at')
-             ->paginate(5);
+             
+             $title = "My Tasks";
+             $user_id = Auth::user()->id;
+             $user_role = Auth::user()->role_id;
+             if($user_role == 1 && Auth::user()->type == 'system'){
+                $tasks = Task::
+                  orderByDesc('created_at')
+                ->paginate(5);
+             }else{
+                $tasks = Task::where('user_id', $user_id)
+                //->tasks()
+                //->orderBy('is_complete')
+                ->orderByDesc('created_at')
+                ->paginate(5);
+            }
+
+            // print_r($tasks);
+            // exit();
  
          // return task index view with paginated tasks
          return view('tasks.index', [
-             'tasks' => $tasks
+             'tasks' => $tasks,
+             'title' => $title
          ]);
 
      
